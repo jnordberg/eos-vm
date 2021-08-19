@@ -31,7 +31,7 @@ struct cnv : type_converter<wasi_api> {
    rhf_t::add<&cls::fn>("wasi_unstable", #fn);
 
 /**
- * Simple implementation of an interpreter using eos-vm.
+ * Simple implementation of a JIT using eos-vm.
  */
 int main(int argc, char** argv) {
    if (argc < 2) {
@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
    // Thread specific `allocator` used for wasm linear memory.
    wasm_allocator wa;
 
-   // Specific the backend with no "host" for host functions.
+   // Specify the backend with the partial implementation of wasi host functions.
    using rhf_t     = eosio::vm::registered_host_functions<wasi_api, execution_interface, cnv>;
    using backend_t = eosio::vm::backend<rhf_t, jit>;
 
@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
       bkend(wasi, "env", "_start");
 
    } catch ( const eosio::vm::exception& ex ) {
-      std::cerr << "eos-vm interpreter error\n";
+      std::cerr << "eos-vm jit error\n";
       std::cerr << ex.what() << " : " << ex.detail() << "\n";
    }
    return wasi.exit_code;
