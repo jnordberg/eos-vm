@@ -12,3 +12,6 @@ target_link_libraries(hello-driver eos-vm)
 
 add_executable(eos-vm-jit ${CMAKE_CURRENT_SOURCE_DIR}/jit.cpp)
 target_link_libraries(eos-vm-jit eos-vm)
+
+add_executable(bench-jit ${CMAKE_CURRENT_SOURCE_DIR}/bench_jit.cpp)
+target_link_libraries(bench-jit eos-vm)
