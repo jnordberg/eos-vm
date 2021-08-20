@@ -14,7 +14,6 @@ int main(int argc, char** argv) {
    using rhf_t = registered_host_functions<standalone_function_t>;
    using backend_t = eosio::vm::backend<rhf_t, jit>;
 
-   null_api napi;
    if (argc < 2) {
       std::cerr << "Error, no wasm file provided\n";
       return -1;
